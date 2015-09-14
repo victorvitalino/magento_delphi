@@ -57,7 +57,7 @@ function create($nome, $sku, $descricao, $desccurta, $peso, $preco) {
                    'attribute_set_id' => 4, // default
                    'type_id' => 'simple',
                    'price' => $preco,
-                   'tax_class_id' => 0, // None
+                   'tax_class_id' => 0, // Sem taxa
                    'page_layout' => 'one_column',
      );
 
