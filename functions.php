@@ -25,7 +25,7 @@ $valores = [$_GET['preco']];// Exemplo para o edit
 Mage::register("isSecureArea", 1); //Setar que essa bosta ta no modo seguro 2 dias pra descobrir isso :s
 umask(0);
 /* Exemplos para o create com parâmetros fixos.*/
-/* 
+/*
 $nome1 = 'teste';
 $sku1 = '00000001';
 $descricao1 = 'Exemplo de Descrição';
@@ -94,8 +94,8 @@ function updates($price, $product_id)
             echo 'produto '.$product_id .' apresentou erro';
         }
     }
-    
-    
+
+
 /*
 Função de Delete -- passa como params o sku do produto.
 */
@@ -113,13 +113,13 @@ function deletes($product_id) {
     		echo 'produto '.$product_id .' apresentou erro';
     	}
     }
-    
-    
+
+
 /*
  *
  * AÇÕES
- * 
- */    
+ *
+ */
 
 /*
 Ação de Edição
@@ -139,7 +139,7 @@ if($acao =='edit'){
 /*
 Ação de Delete
 */
-if($acao == 'delete'){	
+if($acao == 'delete'){
   foreach ($product_delete as $sku){
       $product_id = Mage::getModel("catalog/product")->getIdBySku( $sku );
       deletes($product_id);
@@ -148,7 +148,7 @@ if($acao == 'delete'){
 /*
  Exemplo de delete simples
  https://consultoria7.com/alimentacao/functions.php?acao=delete&id=222222
- 
+
  Exemplo de delete composto
  https://consultoria7.com/alimentacao/functions.php?acao=delete&id=222222&id=333333
  */
@@ -159,7 +159,7 @@ Ação de Create
 if($acao == 'create'){
   create($nome1, $sku1, $descricao1, $desccurta1, $peso1, $preco1);
 }
-/* 
+/*
 Exemplo de create
 https://consultoria7.com/alimentacao/functions.php?acao=create&nome=Filet Mignon&id=222222&descricao=Corte Alto&desccurta=Estilo Tornedor&peso=2&preco=3100
 https://consultoria7.com/alimentacao/functions.php?acao=create&nome=Quibe Frito&id=333333&descricao=Frito em Óleo Vegetal&desccurta=Sem conservantes&peso=1&preco=150
