@@ -51,3 +51,33 @@ foreach ($collection as $col) {
     }
           echo json_encode($itens);
 }
+?>
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+</head>
+<body>
+
+<script type="text/javascript">
+jQuery(document).ready(function(){
+var itens = '<?php echo json_encode($itens); ?>';
+$.ajax({
+        type: "GET",
+        dataType: "json",
+      //  url: "http://agille.brasilia.me:1515/datasnap/rest/TDMFOOD/ReceberPedidoStr/",
+      url: "http://agille.brasilia.me:1515/datasnap/rest/TDMFOOD/ReceberPedidoStr/"+'<?php echo json_encode($itens); ?>',
+        data: itens,
+        success: function(data){
+            alert('Enviado');
+        },
+        error: function(e){
+            console.log(e.message);
+        }
+});
+});
+
+</script>
+
+</body>
+</html>
