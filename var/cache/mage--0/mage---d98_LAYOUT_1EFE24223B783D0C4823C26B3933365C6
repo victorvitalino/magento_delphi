@@ -1,0 +1,86 @@
+<label>One Page Checkout Overview</label>
+<remove name="right"/>
+<remove name="left"/>
+<block type="checkout/onepage_review_info" name="root" output="toHtml" template="checkout/onepage/review/info.phtml">
+   <action method="addItemRender">
+      <type>default</type>
+      <block>checkout/cart_item_renderer</block>
+      <template>checkout/onepage/review/item.phtml</template>
+   </action>
+   <action method="addItemRender">
+      <type>grouped</type>
+      <block>checkout/cart_item_renderer_grouped</block>
+      <template>checkout/onepage/review/item.phtml</template>
+   </action>
+   <action method="addItemRender">
+      <type>configurable</type>
+      <block>checkout/cart_item_renderer_configurable</block>
+      <template>checkout/onepage/review/item.phtml</template>
+   </action>
+   <block type="checkout/cart_totals" name="checkout.onepage.review.info.totals" as="totals" template="checkout/onepage/review/totals.phtml"/>
+   <block type="core/text_list" name="checkout.onepage.review.info.items.before" as="items_before" translate="label">
+      <label>Items Before</label>
+   </block>
+   <block type="core/text_list" name="checkout.onepage.review.info.items.after" as="items_after" translate="label">
+      <label>Items After</label>
+   </block>
+   <block type="checkout/agreements" name="checkout.onepage.agreements" as="agreements" template="checkout/onepage/agreements.phtml"/>
+   <block type="core/template" name="checkout.onepage.review.button" as="button" template="checkout/onepage/review/button.phtml"/>
+</block>
+<reference name="checkout.onepage.review.info.items.after">
+   <block type="paypal/iframe" name="paypal.iframe"/>
+</reference>
+<reference name="checkout.onepage.review.button">
+   <action method="setTemplate">
+      <template helper="paypal/hss/getReviewButtonTemplate">
+         <name>paypal/hss/review/button.phtml</name>
+         <block>checkout.onepage.review.button</block>
+      </template>
+   </action>
+</reference>
+<reference name="checkout.onepage.review.info.items.after">
+   <block type="directpost/form" name="payment.form.directpost" template="authorizenet/directpost/form.phtml">
+      <action method="setMethodInfo"/>
+   </block>
+</reference>
+<reference name="root">
+   <action method="addItemRender">
+      <type>bundle</type>
+      <block>bundle/checkout_cart_item_renderer</block>
+      <template>checkout/onepage/review/item.phtml</template>
+   </action>
+</reference>
+<reference name="root">
+   <action method="addItemRender">
+      <type>downloadable</type>
+      <block>downloadable/checkout_cart_item_renderer</block>
+      <template>downloadable/checkout/onepage/review/item.phtml</template>
+   </action>
+</reference>
+<reference name="checkout.onepage.review.info.items.before">
+   <block type="centinel/authentication" name="centinel.frame" template="centinel/authentication.phtml">
+      <action method="addRelatedBlock">
+         <blockId>checkout-review-submit</blockId>
+      </action>
+      <action method="addRelatedBlock">
+         <blockId>checkout-review-table-wrapper</blockId>
+      </action>
+      <action method="setAuthenticationStartMode">
+         <mode>instant</mode>
+      </action>
+   </block>
+</reference>
+<reference name="top.links">
+   <action method="addLink" translate="label title" module="customer">
+      <label>Log In</label>
+      <url helper="customer/getLoginUrl"/>
+      <title>Log In</title>
+      <prepare/>
+      <urlParams/>
+      <position>100</position>
+   </action>
+</reference>
+<remove name="reorder"/>
+<reference name="right">
+   <block type="sales/reorder_sidebar" name="sale.reorder.sidebar" as="reorder" template="sales/reorder/sidebar.phtml"/>
+</reference>
